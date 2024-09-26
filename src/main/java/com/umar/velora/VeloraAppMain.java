@@ -18,7 +18,6 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 public class VeloraAppMain {
 
-    // Theme colors and fonts are now in the Styling class
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(VeloraAppMain::createAndShowGUI);
@@ -36,11 +35,9 @@ public class VeloraAppMain {
         JPanel homePanel = createHomePanel(cardPanel);
         JPanel mainPanel = createMainPanel(cardPanel);
 
-        // Add panels to cardPanel
         cardPanel.add(homePanel, "Home");
         cardPanel.add(mainPanel, "Main");
 
-        // Show home panel
         CardLayout cl = (CardLayout) (cardPanel.getLayout());
         cl.show(cardPanel, "Home");
 
@@ -58,39 +55,32 @@ public class VeloraAppMain {
         welcomeLabel.setForeground(Styling.FOREGROUND_COLOR);
         welcomeLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
 
-        // Create the chart
         JFreeChart chart = ChartFactory.createLineChart(
-            "", // Chart title
-            "", // X-Axis Label
-            "", // Y-Axis Label
+            "",
+            "", 
+            "", 
             createDataset()
         );
 
-        // Customize chart appearance
         chart.setBackgroundPaint(Styling.BACKGROUND_COLOR);
 
-        // Cast the plot to CategoryPlot to access getRenderer()
         CategoryPlot plot = (CategoryPlot) chart.getPlot();
         plot.setBackgroundPaint(Styling.BACKGROUND_COLOR);
         plot.getRenderer().setSeriesPaint(0, Styling.FOREGROUND_COLOR);
 
-        // Remove chart legend and borders
         chart.removeLegend();
         chart.setBorderVisible(false);
         plot.setOutlineVisible(false);
 
-        // Create ChartPanel and add it to homePanel
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setBackground(Styling.BACKGROUND_COLOR);
         chartPanel.setDomainZoomable(false);
         chartPanel.setRangeZoomable(false);
         chartPanel.setPopupMenu(null);
 
-        // Add components to homePanel
         homePanel.add(welcomeLabel, BorderLayout.NORTH);
         homePanel.add(chartPanel, BorderLayout.CENTER);
 
-        // Add a button to enter the application
         JButton startButton = new JButton("Enter Application");
         startButton.setFont(Styling.BUTTON_FONT);
         startButton.setFocusPainted(false);
@@ -98,14 +88,12 @@ public class VeloraAppMain {
         startButton.setForeground(Styling.BUTTON_TEXT_COLOR);
         startButton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 
-        // Center the button horizontally
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Styling.BACKGROUND_COLOR);
         buttonPanel.add(startButton);
 
         homePanel.add(buttonPanel, BorderLayout.SOUTH);
 
-        // Add action listener to the start button
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -118,7 +106,6 @@ public class VeloraAppMain {
     }
 
     private static DefaultCategoryDataset createDataset() {
-        // Replace with actual data fetching logic if needed
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         dataset.addValue(1, "Values", "Day 1");
         dataset.addValue(3, "Values", "Day 2");
